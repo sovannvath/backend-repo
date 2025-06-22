@@ -2,26 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class UserRoleSeeder  extends Seeder
+class UserRoleSeeder extends Seeder
 {
     public function run()
     {
-        // Create roles
-        $adminRole = Role::firstOrCreate(['name' => 'Admin']);
-        $staffRole = Role::firstOrCreate(['name' => 'Staff']);
-        $warehouseRole = Role::firstOrCreate(['name' => 'Warehouse']);
-
         // Create admin user
         User::firstOrCreate(
             ['email' => 'sovannvath69@gmail.com'],
             [
                 'name' => 'Admin User',
                 'password' => bcrypt('0885778248Vath'),
-                'role_id' => $adminRole->id
+                'role' => 'admin', // ✅ store role as string
             ]
         );
 
@@ -31,7 +25,7 @@ class UserRoleSeeder  extends Seeder
             [
                 'name' => 'Staff User',
                 'password' => bcrypt('0885778248Vath'),
-                'role_id' => $staffRole->id
+                'role' => 'staff',
             ]
         );
 
@@ -41,7 +35,7 @@ class UserRoleSeeder  extends Seeder
             [
                 'name' => 'Warehouse User',
                 'password' => bcrypt('0885778248Vath'),
-                'role_id' => $warehouseRole->id
+                'role' => 'warehouse',
             ]
         );
     }
